@@ -7,7 +7,11 @@ GenomicRegionsFindOverlap<-function(GenomicRegions1, GenomicRegions2=NULL) {
 
     if ((class(GenomicRegions1) == "GenomicRegions") & (class(GenomicRegions2) == "GenomicRegions")) {
     # processa 2 genomic regions single
-    output_regions<-GenomicRegionsComparison(GenomicRegions1, GenomicRegions2)$overlapping.regions
+            if (is.null(GenomicRegions1) | is.null(GenomicRegions2)) {
+            output_regions<-NULL
+            } else {
+            output_regions<-GenomicRegionsComparison(GenomicRegions1, GenomicRegions2)$overlapping.regions
+            }
 
     } else if ((class(GenomicRegions1) == "list") & (is.null(GenomicRegions2))) {
     # processa 1 lista di genomic regions
@@ -18,8 +22,11 @@ GenomicRegionsFindOverlap<-function(GenomicRegions1, GenomicRegions2=NULL) {
       output_regions<-GenomicRegions1[[1]]
         if (length(GenomicRegions1)>1) {
           for (index in 2:length(GenomicRegions1)) {
-          if (is.null(output_regions)) {return(output_regions)}
-          output_regions<-GenomicRegionsComparison(output_regions, GenomicRegions1[[index]])$overlapping.regions
+            if (is.null(output_regions) | is.null(GenomicRegions1[[index]])) {
+            output_regions<-NULL
+            } else {
+            output_regions<-GenomicRegionsComparison(output_regions, GenomicRegions1[[index]])$overlapping.regions
+            }
           }
         }
 
@@ -40,7 +47,11 @@ GenomicRegionsFindOverlap<-function(GenomicRegions1, GenomicRegions2=NULL) {
           output_regions<-list()
 
           for (index in 1:length(GenomicRegions1)) {
-          output_regions<-c(output_regions, list(GenomicRegionsComparison(GenomicRegions1[[index]], GenomicRegions2[[index]])$overlapping.regions))
+            if (is.null(GenomicRegions1[[index]]) | is.null(GenomicRegions2[[index]])) {
+            output_regions<-c(output_regions, list(NULL))
+            } else {
+            output_regions<-c(output_regions, list(GenomicRegionsComparison(GenomicRegions1[[index]], GenomicRegions2[[index]])$overlapping.regions))
+            }
           }
 
 
