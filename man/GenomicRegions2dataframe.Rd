@@ -1,6 +1,5 @@
 \name{GenomicRegions2dataframe}
 \alias{GenomicRegions2dataframe}
-\alias{GenomicRegions2dataframe,GenomicRegions-method}
 \title{
 extract genomic regions information as a dataframe object
 }
@@ -8,11 +7,11 @@ extract genomic regions information as a dataframe object
 extract genomic regions information as a dataframe object
 }
 \usage{
-GenomicRegions2dataframe(.Object)
+GenomicRegions2dataframe(GenomicRegionsObject)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{.Object}{
+  \item{GenomicRegionsObject}{
 Object of class genomic regions
 }
 }

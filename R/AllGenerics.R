@@ -366,18 +366,19 @@ if (!isGeneric("PREDADataAndResults2dataframe")) {
 }
 
 
-##
-## Generic GenomicRegions2dataframe : extract genomic regions information as a dataframe object
-##
-
-if (!isGeneric("GenomicRegions2dataframe")) {
-   if (is.function("GenomicRegions2dataframe")) {
-       fun<-GenomicRegions2dataframe
-   } else {
-      fun<-function(.Object) standardGeneric("GenomicRegions2dataframe")
-   }
-   setGeneric("GenomicRegions2dataframe", fun)
-}
+## changed to a function in version 0.99.3
+# ##
+# ## Generic GenomicRegions2dataframe : extract genomic regions information as a dataframe object
+# ##
+# 
+# if (!isGeneric("GenomicRegions2dataframe")) {
+#    if (is.function("GenomicRegions2dataframe")) {
+#        fun<-GenomicRegions2dataframe
+#    } else {
+#       fun<-function(.Object) standardGeneric("GenomicRegions2dataframe")
+#    }
+#    setGeneric("GenomicRegions2dataframe", fun)
+# }
 
 
 ##
