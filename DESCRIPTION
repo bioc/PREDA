@@ -1,90 +1,61 @@
 Package: PREDA
-Version: 1.9.1
+Version: 1.9.2
 Title: Position RElated Data Anlysis
 Author: Francesco Ferrari <francesco.ferrari@unimore.it>
 Maintainer: Francesco Ferrari <francesco.ferrari@unimore.it>
 License: GPL-2
-Depends: R (>= 2.9.0), Biobase, lokern (>= 1.0.9), multtest, stats, methods, annotate
-Suggests: quantsmooth, qvalue, samr, limma, caTools, affy, PREDAsampledata
+Depends: R (>= 2.9.0), Biobase, lokern (>= 1.0.9), multtest, stats,
+        methods, annotate
+Suggests: quantsmooth, qvalue, samr, limma, caTools, affy,
+        PREDAsampledata
 Enhances: Rmpi, rsprng
-biocViews: Software, CopyNumberVariants, GeneExpression, Genetics
-Description: Package for the position related analysis of quantitative functional genomics data.
-Collate: AllClasses.R
-          AllGenerics.R
-          analysesNames.R
-          CleanNAAnnotationDataframe.R
-          compareFunctionFromStatisticsForPREDA.R
-          computeDatasetSignature.R
-          DataForPREDA2dataframe.R
-          DataForPREDA2GenomicAnnotationsForPREDA.R
-          DataForPREDA2StatisticsForPREDA.R
-          datasetSignatureFromFlags.R
-          eset2GenomicAnnotations.R
-          GE_computeStatistic.R
-          GEhighWeakExpressionWorkflow.R
-          genomePlot_improved.R
-          genomePlot.R
-          GenomicAnnotations2dataframe.R
-          GenomicAnnotations2GenomicAnnotationsForPREDA.R
-          GenomicAnnotations2reference_positions.R
-          GenomicAnnotationsExtract.R
-          GenomicAnnotationsFilter_neg.R
-          GenomicAnnotationsFilter_pos.R
-          GenomicAnnotationsForPREDA2dataframe.R
-          GenomicAnnotationsForPREDA2GenomicAnnotations.R
-          GenomicAnnotationsForPREDA2PREDAResults.R
-          GenomicAnnotationsForPREDAFromfile.R
-          GenomicAnnotationsForPREDAGetExpectedFlags.R
-          GenomicAnnotationsFromdataframe.R
-          GenomicAnnotationsFromfile.R
-          GenomicAnnotationsFromLibrary.R
-          GenomicAnnotationsSortAndCleanNA.R
-          GenomicRegions2dataframe.R
-          GenomicRegionsAnnotate.R
-          GenomicRegionsChrNumber.R
-          GenomicRegionsComparison.R
-          GenomicRegionsCreateRegionsIds.R
-          GenomicRegionsFilter_neg.R
-          GenomicRegionsFilter_pos.R
-          GenomicRegionsFindOverlap.R
-          GenomicRegionsFromdataframe.R
-          GenomicRegionsFromfile.R
-          GenomicRegionsNumber.R
-          GenomicRegionsSpan.R
-          GenomicRegionsTotalSpan.R
-          GEsimulationsWorkflow.R
-          getExpectedSmoothFunction.R
-          getExpectedSmoothFunction_runmean.R
-          getObservedSmoothFunction.R
-          getObservedSmoothFunction_runmean.R
-          getStatisticByName.R
-          initialize-methods.R
-          MergeStatisticAnnotations2DataForPREDA.R
-          PREDADataAndResults2dataframe.R
-          PREDA_main_permRows.R
-          PREDA_main_permSamples.R
-          PREDA_main.R
-          PREDA_multTestCorrection.R
-          PREDA_quantsmoothStatPerm.R
-          PREDA_quantsmoothStat.R
-          PREDAResults2dataframe.R
-          PREDAResults2GenomicRegions.R
-          PREDAResults2GenomicRegionsSingle.R
-          PREDAResults2PREDADataAndResults.R
-          PREDAResultsGetObservedFlags.R
-          PREDA_smoothStatPerm.R
-          PREDA_smoothStat.R
-          PREDA_splineStatPerm.R
-          PREDA_splineStat.R
-          preprocessingGE.R
-          RMAwithCDFfilter.R
-          simulations.R
-          SODEGIR_GEstatistics.R
-          SODEGIRpreprocessingGE.R
-          SortAnnotationDataframe.R
-          StatisticsForPREDA2dataframe.R
-          StatisticsForPREDAFilterColumns_neg.R
-          StatisticsForPREDAFilterColumns_pos.R
-          StatisticsForPREDAFromdataframe.R
-          statisticsForPREDAfromEset.R
-          StatisticsForPREDAFromfile.R
+Description: Package for the position related analysis of quantitative
+        functional genomics data.
+Collate: AllClasses.R AllGenerics.R analysesNames.R
+        CleanNAAnnotationDataframe.R
+        compareFunctionFromStatisticsForPREDA.R
+        computeDatasetSignature.R DataForPREDA2dataframe.R
+        DataForPREDA2GenomicAnnotationsForPREDA.R
+        DataForPREDA2StatisticsForPREDA.R datasetSignatureFromFlags.R
+        eset2GenomicAnnotations.R GE_computeStatistic.R
+        GEhighWeakExpressionWorkflow.R genomePlot_improved.R
+        genomePlot.R GenomicAnnotations2dataframe.R
+        GenomicAnnotations2GenomicAnnotationsForPREDA.R
+        GenomicAnnotations2reference_positions.R
+        GenomicAnnotationsExtract.R GenomicAnnotationsFilter_neg.R
+        GenomicAnnotationsFilter_pos.R
+        GenomicAnnotationsForPREDA2dataframe.R
+        GenomicAnnotationsForPREDA2GenomicAnnotations.R
+        GenomicAnnotationsForPREDA2PREDAResults.R
+        GenomicAnnotationsForPREDAFromfile.R
+        GenomicAnnotationsForPREDAGetExpectedFlags.R
+        GenomicAnnotationsFromdataframe.R GenomicAnnotationsFromfile.R
+        GenomicAnnotationsFromLibrary.R
+        GenomicAnnotationsSortAndCleanNA.R GenomicRegions2dataframe.R
+        GenomicRegionsAnnotate.R GenomicRegionsChrNumber.R
+        GenomicRegionsComparison.R GenomicRegionsCreateRegionsIds.R
+        GenomicRegionsFilter_neg.R GenomicRegionsFilter_pos.R
+        GenomicRegionsFindOverlap.R GenomicRegionsFromdataframe.R
+        GenomicRegionsFromfile.R GenomicRegionsNumber.R
+        GenomicRegionsSpan.R GenomicRegionsTotalSpan.R
+        GEsimulationsWorkflow.R getExpectedSmoothFunction.R
+        getExpectedSmoothFunction_runmean.R getObservedSmoothFunction.R
+        getObservedSmoothFunction_runmean.R getStatisticByName.R
+        initialize-methods.R MergeStatisticAnnotations2DataForPREDA.R
+        PREDADataAndResults2dataframe.R PREDA_main_permRows.R
+        PREDA_main_permSamples.R PREDA_main.R
+        PREDA_multTestCorrection.R PREDA_quantsmoothStatPerm.R
+        PREDA_quantsmoothStat.R PREDAResults2dataframe.R
+        PREDAResults2GenomicRegions.R
+        PREDAResults2GenomicRegionsSingle.R
+        PREDAResults2PREDADataAndResults.R
+        PREDAResultsGetObservedFlags.R PREDA_smoothStatPerm.R
+        PREDA_smoothStat.R PREDA_splineStatPerm.R PREDA_splineStat.R
+        preprocessingGE.R RMAwithCDFfilter.R simulations.R
+        SODEGIR_GEstatistics.R SODEGIRpreprocessingGE.R
+        SortAnnotationDataframe.R StatisticsForPREDA2dataframe.R
+        StatisticsForPREDAFilterColumns_neg.R
+        StatisticsForPREDAFilterColumns_pos.R
+        StatisticsForPREDAFromdataframe.R statisticsForPREDAfromEset.R
+        StatisticsForPREDAFromfile.R
+biocViews: Software, CopyNumberVariation, GeneExpression, Genetics
