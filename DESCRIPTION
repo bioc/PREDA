@@ -1,8 +1,8 @@
 Package: PREDA
 Version: 1.21.0
 Title: Position RElated Data Anlysis
-Author: Francesco Ferrari <francesco.ferrari@unimore.it>
-Maintainer: Francesco Ferrari <francesco.ferrari@unimore.it>
+Author: Francesco Ferrari <francesco.ferrari@ifom.eu>
+Maintainer: Francesco Ferrari <francesco.ferrari@ifom.eu>
 License: GPL-2
 Depends: R (>= 2.9.0), Biobase, lokern (>= 1.0.9), multtest, stats,
         methods, annotate
