@@ -72,10 +72,10 @@ Francesco Ferrari
 
 require(PREDAsampledata)
 
-data(gaExpressionSetRCC)
+data(ExpressionSetRCC)
 
 GEstatisticsForPREDA<-statisticsForPREDAfromEset(
-gaExpressionSetRCC, statisticType="tstatistic",
+ExpressionSetRCC, statisticType="tstatistic",
 referenceGroupLabel="normal", classVector=sampleinfo[,"Class"])
 
   }

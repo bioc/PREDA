@@ -180,7 +180,7 @@ Since PREDA is a flexible procedure that can actually be adopted for the analysi
 <<eval=FALSE, echo=TRUE>>=
 GEDataForPREDA<-preprocessingGE(SampleInfoFile=infofile,
 CELfiles_dir=CELfilesPath,
-custom_cdfname="gahgu133plus2",
+custom_cdfname="hgu133plus2",
 arrayNameColumn=1,
 sampleNameColumn=2,
 classColumn="Class",
@@ -198,7 +198,7 @@ Alternatively we can run the preprocessing steps using the raw data preloaded in
 <<eval=FALSE, echo=TRUE>>=
 GEDataForPREDA<-preprocessingGE(
 AffyBatchInput=AffybatchRCC,
-custom_cdfname="gahgu133plus2",
+custom_cdfname="hgu133plus2",
 classColumn="Class",
 referenceGroupLabel="normal",
 statisticType="tstatistic",
@@ -221,30 +221,30 @@ Raw gene expression data can be preprocessed and normalized using standard proce
 
 <<eval=FALSE, echo=TRUE >>=
 # generate ExpressionSet from raw  CEL files
-gaExpressionSetRCC <-justRMA(filenames=sampleinfo[,"Arrayname"], celfile.path=CELfilesPath, sampleNames=sampleinfo[,"Samplename"], cdfname="gahgu133plus2")
+ExpressionSetRCC <-justRMA(filenames=sampleinfo[,"Arrayname"], celfile.path=CELfilesPath, sampleNames=sampleinfo[,"Samplename"], cdfname="hgu133plus2")
 @
 <<eval=TRUE, echo=FALSE >>=
-data(gaExpressionSetRCC)
+data(ExpressionSetRCC)
 @
 
 Again, as alternative to the raw CEL files, for the sample dataset used here we can generate the EpressionSet object starting from the raw data preloaded in the AffyBatch object.
 
 <<eval=FALSE, echo=TRUE >>=
-AffybatchRCC@cdfName<-"gahgu133plus2"
-annotation(AffybatchRCC)<-"gahgu133plus2"
-gaExpressionSetRCC <- rma(AffybatchRCC)
+AffybatchRCC@cdfName<-"hgu133plus2"
+annotation(AffybatchRCC)<-"hgu133plus2"
+ExpressionSetRCC <- rma(AffybatchRCC)
 @
 
 % The final resulting ExpressionSet object is also available in the sampledata package and can be loaded directly with the command
 % <<eval=FALSE, echo=TRUE >>=
-% data(gaExpressionSetRCC)
+% data(ExpressionSetRCC)
 % @
 
 
 Then the function \texttt{statisticsForPREDAfromEset} can be used to compute statistics for differential expression on ExpressionSet object data to generate a statisticForPREDA object. In this example a t-statistic is computed comparing each group of samples with the specified reference group: in this case the reference group is identified by samples with Class label ``normal'' ans the only alternative value for Class label is ``RCC''. Therefore in this example only one comparison is taken into account, i.e. the comparison of RCC samples VS normal samples, because the classVector parameter has just two distinct values. In case multiple classes of samples are available, the selected statistic (in this case the ``t-statistic'') is repeatedly computed taking into account each group VS reference group comparison.
 
 <<eval=TRUE, echo=TRUE>>=
-GEstatisticsForPREDA<-statisticsForPREDAfromEset(gaExpressionSetRCC, statisticType="tstatistic", referenceGroupLabel="normal", classVector=sampleinfo[,"Class"])
+GEstatisticsForPREDA<-statisticsForPREDAfromEset(ExpressionSetRCC, statisticType="tstatistic", referenceGroupLabel="normal", classVector=sampleinfo[,"Class"])
 @
 
 Users can verify the available statistics (just one in our example) using the \texttt{analysesNames()} function.
@@ -271,7 +271,7 @@ The genomic annotations required for PREDA analysis are managed using \texttt{GE
 \paragraph{GenomicAnnotations from ExpressionSet.} The microarray platform used for the expression profiles of the sample gene expression dataset (ArrayExpress dataset E-TABM-282; table \ref{tab:Samplegeneexpressiondataset}) is Affymetrix GeneChip HG-U133Plus2.0. The genomic annotations for the probe IDs associated to this platform can be retrieved from the corresponding Bioconductor libraries: see also the Bioconductor documentation for further details, and in particular the documentation for packages affy, annotationDBI and annotate. The information concerning the microarray platform and the associated Bioconductor annotation library are included into a specific slot of the ExpressionSet object as well.
 
 <<eval=FALSE, echo=TRUE>>=
-GEGenomicAnnotations<-eset2GenomicAnnotations(gaExpressionSetRCC, retain.chrs=1:22)
+GEGenomicAnnotations<-eset2GenomicAnnotations(ExpressionSetRCC, retain.chrs=1:22)
 @
 
 We suggest not to run Position RElated Analysis on sex chromosomes because usually a dataset composition in term of male and female subjects could be unbalanced. That's why the ``retain.chrs'' parameter is set to retain only autosomal chromosomes, i.e. from 1 to 22 in Human.
@@ -288,7 +288,7 @@ GEGenomicAnnotations<-GenomicAnnotationsFromLibrary(annotLibrary="org.Hs.eg.db",
 \paragraph{GenomicAnnotations with optional annotations columns.} Finally the above described functions can be used to collect as well additional (optional) annotation columns from the Bioconductor annotation libraries. These optional annotation columns are not required for PREDA analysis but they can be useful for final results annotation. In the following example ``SYMBOL'' and ``ENTREZID'' annotation fileds are retrieved from the annotation library for hgu133plus2 GeneChips and included into the output \texttt{GEnomicAnnotations} object.
 
 <<eval=FALSE, echo=TRUE>>=
-GEGenomicAnnotations<-GenomicAnnotationsFromLibrary(annotLibrary="gahgu133plus2.db", retain.chrs=1:22, optionalAnnotations=c("SYMBOL", "ENTREZID"))
+GEGenomicAnnotations<-GenomicAnnotationsFromLibrary(annotLibrary="hgu133plus2.db", retain.chrs=1:22, optionalAnnotations=c("SYMBOL", "ENTREZID"))
 @
 
 
@@ -437,7 +437,7 @@ The function \texttt{SODEGIRpreprocessingGE} allows performing SODEGIR preproces
 SODEGIRGEDataForPREDA<-SODEGIRpreprocessingGE(
 SampleInfoFile=infofile,
 CELfiles_dir=CELfilesPath,
-custom_cdfname="gahgu133plus2",
+custom_cdfname="hgu133plus2",
 arrayNameColumn=1,
 sampleNameColumn=2,
 classColumn="Class",
@@ -455,7 +455,7 @@ data(AffybatchRCC)
 # preprocess raw data files
 SODEGIRGEDataForPREDA<-SODEGIRpreprocessingGE(
 AffyBatchInput=AffybatchRCC,
-custom_cdfname="gahgu133plus2",
+custom_cdfname="hgu133plus2",
 classColumn="Class",
 referenceGroupLabel="normal",
 statisticType="tstatistic",

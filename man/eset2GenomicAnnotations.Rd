@@ -47,9 +47,9 @@ Francesco Ferrari
 \examples{
   \dontrun{
 require("PREDAsampledata")
-data(gaExpressionSetRCC)
+data(ExpressionSetRCC)
 
-GEGenomicAnnotations<-eset2GenomicAnnotations(gaExpressionSetRCC,
+GEGenomicAnnotations<-eset2GenomicAnnotations(ExpressionSetRCC,
 retain.chrs=1:22)
 
   }

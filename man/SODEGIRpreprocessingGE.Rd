@@ -154,7 +154,7 @@ infofile <- file.path(CELfilesPath , "sampleinfoGE_PREDA.txt")
 SODEGIRGEDataForPREDA<-SODEGIRpreprocessingGE(SampleInfoFile=
 infofile,
 CELfiles_dir=CELfilesPath,
-custom_cdfname="gahgu133plus2",
+custom_cdfname="hgu133plus2",
 arrayNameColumn=1,
 sampleNameColumn=2,
 classColumn="Class",

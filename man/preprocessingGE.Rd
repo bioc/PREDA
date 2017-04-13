@@ -112,7 +112,7 @@ sampleinfo<-read.table(infofile, sep="\t", header=TRUE)
 
 GEDataForPREDA<-preprocessingGE(SampleInfoFile=infofile,
 CELfiles_dir=CELfilesPath,
-custom_cdfname="gahgu133plus2",
+custom_cdfname="hgu133plus2",
 arrayNameColumn=1,
 sampleNameColumn=2,
 classColumn="Class",

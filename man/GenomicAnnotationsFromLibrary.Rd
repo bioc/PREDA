@@ -50,7 +50,7 @@ GEGenomicAnnotations<-GenomicAnnotationsFromLibrary(annotLibrary=
 
 # with optional annotations Genesymbols and EntrezGeneIDs
 GEGenomicAnnotations<-GenomicAnnotationsFromLibrary(annotLibrary=
-"gahgu133plus2.db", retain.chrs=1:22,
+"hgu133plus2.db", retain.chrs=1:22,
 optionalAnnotations=c("SYMBOL", "ENTREZID"))
 
 
