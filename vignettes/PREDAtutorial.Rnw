@@ -216,7 +216,12 @@ The \texttt{GEDataForPREDA} object contains all of the information and data requ
 % statistics for PREDA from CEL files
 \paragraph{Statistics for PREDA from CEL files.} In this sample analysis, we will generate a \texttt{statisticsForPREDA} object, that is the S4-class used in PREDA for managing genomic data, directly from raw Affymetrix .CEL files. Since the analysis aim at identifying differentially expressed genomic regions, in the following example the \texttt{statisticsForPREDA} object will contain statistics accounting for differential expression of each individual gene.
 
-Raw gene expression data can be preprocessed and normalized using standard procedures from affy package, such as RMA, to obtain an ExpressionSet object: the common data structure used in Bioconductor to manage gene expression data. Here we show just an example generating an ExpressionSet object from raw Affymetrix CEL files. The same object can be obtained from expression data coming other platforms (see also Bioconductor documentation). The adoption of reliable annotations expression data is a crucial issue for position related analysis, because proper association of expression level to genomic postions is required. In particular, for Affymetrix GeneChips, the adoption of up do date probes annotations, and possibly custom probesets definitions, proved to strongly improve gene expression analysis results in a number of publications \cite{PubMed_16284200,PubMed_18005434,PubMed_17394657,PubMed_15850491}. For this reason we are here adopting a custom probesets definition (custom CDF) for data preprocessing with justRMA function: the ``cdfname'' parameter is used to specify that GeneAnnot based custom CDF \cite{PubMed_18005434} must be use instead of standard Affymetrix CDF (i.e. probeset definitions).
+Raw gene expression data can be preprocessed and normalized using standard procedures from affy package, such as RMA, to obtain an ExpressionSet object: the common data structure used in Bioconductor to manage gene expression data. Here we show just an example generating an ExpressionSet object from raw Affymetrix CEL files. The same object can be obtained from expression data coming other platforms (see also Bioconductor documentation).
+
+The adoption of reliable annotations expression data is a crucial issue for position related analysis, because proper association of expression level to genomic postions is required. In particular, for Affymetrix GeneChips, the adoption of up do date probes annotations, and possibly custom probesets definitions, proved to improve the gene expression analysis results in a number of publications \cite{PubMed_16284200,PubMed_18005434,PubMed_17394657,PubMed_15850491}. For this reason we most strongly suggest to adopt custom probesets definition (custom CDF) for data preprocessing with justRMA function: the ``cdfname'' parameter can be used to specify that a custom CDF \cite{PubMed_16284200,PubMed_18005434} must be use instead of standard Affymetrix CDF (i.e. probeset definitions).
+
+\vspace{5mm}
+As of April 2017 release of Bioconductor, there will be no more any custom CDF package available within Bioconductor repository. For this reason in the working examples provided in this tutorial we are going to use the standard probeset definitions. Custom gene-level centered probeset definitions are still available here http://www.xlab.unimo.it/GA\_CDF/ for GeneAnnot based definitions \cite{PubMed_18005434} or here http://brainarray.mbni.med.umich.edu/Brainarray/Database/customcdf/genomic\_curated\_CDF.asp for a broader set of options based on different databases \cite{PubMed_16284200}.
 
 
 <<eval=FALSE, echo=TRUE >>=
@@ -342,7 +347,7 @@ Data permutations are used to estimate the significance of extreme values in smo
 \paragraph{Parallel computing}
 % speed up con Rmpi
 The overall algorithm adopted for the integrated analysis of gene expression data and genomic positions is computationally intensive. This is mainly due to the analytical procedure that requires a high number of data re-sampling to empirically estimate on every sample the statistical significance of observed values. This can be considered a typical ``embarrassingly parallel'' problem, therefore a parallel implementation of the software has been already developed, so as to allow effectively exploiting the computational resources of either an HPC system or common computer desktops with modern multi-core processors.
-To enable parallel computations during PREDA\_main execution, end user has just to set the ``parallelComputations'' parameters equal to \texttt{TRUE}. Please note that in order to run PREDA on a parallel computing environment proper installation and configuration of R packages ``Rmpi'' and ``rsprng'' is required: these packages are among suggested packages for PREDA but not among PREDA dependencies.
+To enable parallel computations during PREDA\_main execution, end user has just to set the ``parallelComputations'' parameters equal to \texttt{TRUE}. Please note that in order to run PREDA on a parallel computing environment proper installation and configuration of R packages ``Rmpi'' and ``rsprng'' is required: these packages are among suggested packages for PREDA but not among PREDA dependencies, as unfortunately their proper configuration might required expert users or system administrators, depending on the computing system that is used.
 
 
 
@@ -368,7 +373,7 @@ head(dataframe_UPregions)
 
 \subsection{Plot the results}
 
-The most interesting visualization of significant genomic regions (in this example differentially expressed regions) can be obtained with the \texttt{genomePlot} functionSee figure \ref{fig:genomePlot1onlyGE} for the output results.
+The most interesting visualization of significant genomic regions (in this example differentially expressed regions) can be obtained with the \texttt{genomePlot} function. See fig \ref{fig:genomePlot1onlyGE} for the output results.
 
 % genome plot con genomic regions selected
 <<eval=FALSE, label=genomePlot1, include=FALSE>>=
@@ -406,6 +411,12 @@ checkplot<-genomePlot(GEanalysisResults, genomicRegions=c(genomic_regions_UP, ge
 \end{figure}
 
 The \texttt{genomePlot} function is actually a very complex function allowing to draw also complex plots. We strongly suggest to carefully read the function documentation.
+
+
+\vspace{5mm}
+As of April 2017 release of Bioconductor, there will be no more any custom CDF package available within Bioconductor repository.
+As can be observed in fig \ref{fig:genomePlot1onlyGE} and fig \ref{fig:genomePlot1onlyGE_nogroup} the use of standard probeset definitions, incorporating multiple probeset per gene locus, with variable specificity, yield more noisy position related data analysis results than what achieved with custom gene-centered probeset definitions. For examples of these results the users can refer to PREDA tutorial vignette up to Bioc release 3.4, i.e. the latest release containing custom CDF definition packages. 
+Custom gene-level centered probeset definitions are still available here http://www.xlab.unimo.it/GA\_CDF/ for GeneAnnot based definitions \cite{PubMed_18005434} or here http://brainarray.mbni.med.umich.edu/Brainarray/Database/customcdf/genomic\_curated\_CDF.asp for a broader set of options based on different databases\cite{PubMed_16284200}.
 
 
 
@@ -488,7 +499,13 @@ SODEGIR_GE_DOWN<-PREDAResults2GenomicRegions(SODEGIRGEanalysisResults, qval.thre
 @
 
 A list of GenomicRegions objects is obtained: with one GenomicRegions object for each sample of the dataset.
-Therefore the significant reginons detected in each individual sample can be plotted using genomePlot function: see figure \ref{fig:genomePlotSODEGIRgeOnesample}.
+Therefore the significant regions detected in each individual sample can be plotted using genomePlot function: see figure \ref{fig:genomePlotSODEGIRgeOnesample}.
+
+\vspace{5mm}
+As of April 2017 release of Bioconductor, there will be no more any custom CDF package available within Bioconductor repository.
+As can be observed in fig \ref{fig:genomePlotSODEGIRgeOnesample} the use of standard probeset definitions for gene expression microarrays, incorporating multiple probesets per gene locus, with variable specificity, yield more noisy position related data analysis results than what achieved with custom gene-centered probeset definitions. For examples of these results the users can refer to PREDA tutorial vignette up to Bioc release 3.4, i.e. the latest release containing custom CDF definition packages. 
+Custom gene-level centered probeset definitions are still available here http://www.xlab.unimo.it/GA\_CDF/ for GeneAnnot based definitions \cite{PubMed_18005434} or here http://brainarray.mbni.med.umich.edu/Brainarray/Database/customcdf/genomic\_curated\_CDF.asp for a broader set of options based on different databases \cite{PubMed_16284200}.
+
 
 
 <<eval=FALSE, label=genomePlotSODEGIRge1, include=FALSE>>=
