@@ -50,7 +50,7 @@ GE_computeStatistic_onMatrix<-function(datamatrix, classFactor, statisticType, l
   datamatrix<-log2(datamatrix)
   }
 
-  implemented_statistics<-c("tstatistic", "FC", "FCmedian", "eBayes", "SAM")
+  implemented_statistics<-c("tstatistic", "FC", "FCmedian", "eBayes") #, "SAM")
 
   if (!(statisticType %in% implemented_statistics)) {
   stop(paste("The",statisticType, "is not implemented"))
@@ -107,15 +107,15 @@ GE_computeStatistic_onMatrix<-function(datamatrix, classFactor, statisticType, l
     fit3<-eBayes(fit2)
 
     statistic_vector<-topTable(fit3, coef=1, number=nrow(fit3$genes), adjust.method="none", sort.by="none")$t
-  } else if (statisticType=="SAM") {
-    require(samr)
-    sam.dataobject<-list(x=datamatrix,y=classFactor, geneid=rownames(datamatrix), genenames=rownames(datamatrix), logged2=TRUE)
-    samr.obj<-samr(data=sam.dataobject, resp.type="Two class unpaired", nperms=1, testStatistic="standard")
-    delta.table <- samr.compute.delta.table(samr.obj,nvals=1)
-    siggenes.table<-samr.compute.siggenes.table(samr.obj=samr.obj, del=delta.table[1,"delta"],  data=sam.dataobject, delta.table=delta.table, all.genes=TRUE)
-    outputTable<-rbind(siggenes.table$genes.up, siggenes.table$genes.lo)
-    rownames(outputTable)<-outputTable[,"Gene ID"]
-    statistic_vector<-as.numeric(outputTable[rownames(datamatrix),"Score(d)"])
+#  } else if (statisticType=="SAM") {
+#    require(samr)
+#   sam.dataobject<-list(x=datamatrix,y=classFactor, geneid=rownames(datamatrix), genenames=rownames(datamatrix), logged2=TRUE)
+#    samr.obj<-samr(data=sam.dataobject, resp.type="Two class unpaired", nperms=1, testStatistic="standard")
+#    delta.table <- samr.compute.delta.table(samr.obj,nvals=1)
+#    siggenes.table<-samr.compute.siggenes.table(samr.obj=samr.obj, del=delta.table[1,"delta"],  data=sam.dataobject, delta.table=delta.table, all.genes=TRUE)
+#    outputTable<-rbind(siggenes.table$genes.up, siggenes.table$genes.lo)
+#    rownames(outputTable)<-outputTable[,"Gene ID"]
+#    statistic_vector<-as.numeric(outputTable[rownames(datamatrix),"Score(d)"])
 
   } else {
   stop("Wrong statisticType")

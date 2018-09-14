@@ -1,12 +1,12 @@
 Package: PREDA
-Version: 1.27.0
+Version: 1.27.1
 Title: Position Related Data Analysis
 Author: Francesco Ferrari <francesco.ferrari@ifom.eu>
 Maintainer: Francesco Ferrari <francesco.ferrari@ifom.eu>
 License: GPL-2
 Depends: R (>= 2.9.0), Biobase, lokern (>= 1.0.9), multtest, stats,
         methods, annotate
-Suggests: quantsmooth, qvalue, samr, limma, caTools, affy,
+Suggests: quantsmooth, qvalue, limma, caTools, affy,
         PREDAsampledata
 Enhances: Rmpi, rsprng
 Description: Package for the position related analysis of quantitative

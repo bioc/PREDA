@@ -52,8 +52,7 @@ in computing statistics for differential expression.
 }
   \item{statisticType}{
 Stastistic for differential expression that is computed on input
-data. Possible values are "tstatistic", "SAM" (SAM statistical
-score for differential expression), "FC" (Fold Change),
+data. Possible values are "tstatistic", "FC" (Fold Change),
 "FCmedian" (fold change computed on medians)
 }
   \item{optionalAnnotations}{
@@ -96,9 +95,11 @@ reference group is computed.
   original SODEGIR apper by Bicciato et al. (Nucleic Acids Res. 2009).
 
   The original SODEGIR statistic for Gene Expression was based on
-  the SAM score. Therefore in the current PREDA version the
-  varianceAll=TRUE parameter can be used only for SAM statistic:
-  when singleSampleOutput is TRUE and a different statisticType
+  the SAM score. However, since July 2018 the original samr package is
+  no more available in CRAN. Therefore in the current PREDA version the
+  varianceAll=TRUE and singleSampleOutput=TREU
+  can't be used with SAM.
+  When singleSampleOutput is TRUE and a different statisticType
   is used, the variance is actually computed using only the normal
   (reference) samples.
 
