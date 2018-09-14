@@ -51,8 +51,7 @@ in computing statistics for differential expression.
 }
   \item{statisticType}{
 Stastistic for differential expression that is computed on input
-data. Possible values are "tstatistic", "SAM" (SAM statistical
-score for differential expression), "FC" (Fold Change),
+data. Possible values are "tstatistic", "FC" (Fold Change),
 "FCmedian" (fold change computed on medians)
 }
   \item{optionalAnnotations}{

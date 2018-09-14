@@ -10,7 +10,7 @@ Wrapper function for gene expression statistics preprocessing for SODEGIR analys
 \usage{
 # SODEGIR_GEstatistics(.Object, pData_classColumn=NULL,
 # referenceGroupLabel=NULL,
-# statisticType=c("tstatistic", "FC", "FCmedian", "eBayes", "SAM"),
+# statisticType=c("tstatistic", "FC", "FCmedian", "eBayes"),
 # singleSampleOutput=TRUE, varianceAll=FALSE)
 
 SODEGIR_GEstatistics(.Object, ...)
@@ -31,8 +31,7 @@ SODEGIR_GEstatistics(.Object, ...)
       }
       \item{statisticType:}{
       Stastistic for differential expression that is computed on input
-      data. Possible values are "tstatistic", "SAM" (SAM statistical
-      score for differential expression), "FC" (Fold Change),
+      data. Possible values are "tstatistic", "FC" (Fold Change),
       "FCmedian" (fold change computed on medians)
       }
       \item{singleSampleOutput:}{
@@ -51,9 +50,10 @@ SODEGIR_GEstatistics(.Object, ...)
       original SODEGIR apper by Bicciato et al. (Nucleic Acids Res. 2009).
 
       The original SODEGIR statistic for Gene Expression was based on
-      the SAM score. Therefore in the current PREDA version the
-      varianceAll=TRUE parameter can be used only for SAM statistic:
-      when singleSampleOutput is TRUE and a different statisticType
+      the SAM score. However, since July 2018 the samr package is no more available in CRAN.
+      Therefore in the current PREDA version the
+      varianceAll=TRUE parameter can't be used as SAM is not available.
+      When singleSampleOutput is TRUE and a different statisticType
       is used, the variance is actually computed using only the normal
       (reference) samples.
 

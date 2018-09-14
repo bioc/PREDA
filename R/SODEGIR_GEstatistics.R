@@ -1,7 +1,8 @@
 
 
 
-setMethod("SODEGIR_GEstatistics", "ExpressionSet", function(.Object, pData_classColumn=NULL, referenceGroupLabel=NULL, statisticType=c("tstatistic", "FC", "FCmedian", "eBayes", "SAM"), singleSampleOutput=TRUE, varianceAll=FALSE) {
+setMethod("SODEGIR_GEstatistics", "ExpressionSet", function(.Object, pData_classColumn=NULL, referenceGroupLabel=NULL, statisticType=c("tstatistic", "FC", "FCmedian", "eBayes"), #, "SAM")
+	 singleSampleOutput=TRUE, varianceAll=FALSE) {
 
 ExpressionSet_input<-.Object
 # possibili valori per statisticType
@@ -24,26 +25,27 @@ treatmentGroupLabel<-unique(Classes_vector[Classes_vector!=referenceGroupLabel])
         
         if (varianceAll) {
 
-          if (statisticType!="SAM") {
-warning("varianceAll=TRUE in the single sample analysis (singleSampleOutput=TRUE)
-is implemented only for SAM statistic type: as described in 
+#          if (statisticType!="SAM") {
+stop("varianceAll=TRUE in the single sample analysis (singleSampleOutput=TRUE)
+was implemented only for SAM statistic type: as described in 
 the original SODEGIR paper by Bicciato et al. (NAR 2009).
-For other statistic types varianceAll=FALSE is used intead for singleSampleOutput")
-          }
-        ## statistics with variance computed on the whole set of normal and tumor samples
-        ## as described in the paper by Bicciato et al.
-
-        sam.data<-exprs(ExpressionSet_input)
-        classFactor<-ifelse((Classes_vector==treatmentGroupLabel), yes=2, no=1)
-        classFactor<-as.factor(classFactor)
-        data<-list(x=sam.data,y=classFactor, geneid=rownames(sam.data),genenames=rownames(sam.data), logged2=TRUE)
-        sam.obj<-samr(data,resp.type="Two class unpaired",nperms=1)
-        meansReference<-rowMeans(sam.data[,(classFactor==1),drop=FALSE])
-        statisticsMatrix<-((sam.data[,(classFactor==2),drop=FALSE]-meansReference)/sam.obj$sd)
+However, samr CRAN package is no more available since July 2018.
+For other statistic types varianceAll=FALSE can be used for singleSampleOutput")
+#          }
+#        ## statistics with variance computed on the whole set of normal and tumor samples
+#        ## as described in the paper by Bicciato et al.
+#
+#        sam.data<-exprs(ExpressionSet_input)
+#        classFactor<-ifelse((Classes_vector==treatmentGroupLabel), yes=2, no=1)
+#        classFactor<-as.factor(classFactor)
+#        data<-list(x=sam.data,y=classFactor, geneid=rownames(sam.data),genenames=rownames(sam.data), logged2=TRUE)
+#        sam.obj<-samr(data,resp.type="Two class unpaired",nperms=1)
+#        meansReference<-rowMeans(sam.data[,(classFactor==1),drop=FALSE])
+#        statisticsMatrix<-((sam.data[,(classFactor==2),drop=FALSE]-meansReference)/sam.obj$sd)
 
         } else {
-        # to compute the statistics and astimating variance only from the reference groups of samples
-        # this is basically done by relicating each trated sample and using the standard functions for the statistics
+        # to compute the statistics and estimating variance only from the reference groups of samples
+        # this is basically done by replicating each trated sample and using the standard functions for the statistics
 
           for (treatedSample in which(Classes_vector==treatmentGroupLabel)) {
           
